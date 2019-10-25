@@ -4,11 +4,11 @@
 
 These are configured for the objectIDs and tenantIDs in microsoft.com, so are unsuitable as they stand for partner demos. Download the files, fork the repo etc. so you can customise your descriptions, objectIDs, tenantID etc.
 
-The demo-magic.sh ustomised script used for demoing CLI commands so that you don't mistype. Based off a version used at Ready last year in the AKS demos. Download to your Linux homedir and make executable.  Used by the other scripts.
+The (customised) demo-magic.sh script is used for demoing CLI commands so that you don't get distracted by typing ot mistype a command. It is based off a version used at Ready last year in the AKS demos, and does actually execute the commands. Download to your Linux homedir and make executable.  It is used by the other scripts.
 
 ## Templates
 
-Both templates do the same in that they only create a Lighthouse definition ready for the customer to assign in the Service Providers portal blade.
+Both templates achieve the same result. They create a Lighthouse definition ready for the customer to assign in the Service Providers portal blade.
 
 Three assignments:
 
@@ -18,11 +18,11 @@ Three assignments:
 
 This is just to illustrate the authorisations as a list and throw in a few variants for built in role and security principals.
 
-If you don't have a service principal then you can create one in the service provider context by loggin in and then running `az ad sp create-for-rbac --name http://billingreader --skip-assignment`. (The last switch skips the standard Contributor at subscription scope RBAC assignment.)
+If you don't have a service principal then you can create one in the service provider context by logging in and then running `az ad sp create-for-rbac --name http://billingreader --skip-assignment`. (The last switch skips the standard Contributor at subscription scope RBAC assignment.)
 
 ## Demoing
 
-Works great with multiple virtual desktops, so you can visually slide between the service provider world and the customer world.
+Works great with multiple virtual desktops, so you can visually slide between the service provider world and the customer world. Otherwise go slow and make sure everyone knows where they are as it can be confusing skipping around too much.
 
 ### Service Provider
 
@@ -87,3 +87,5 @@ curl -H 'Cache-Control: no-cache' -sSL https://raw.githubusercontent.com/richene
 ```
 
 You can use this to redirect to a file in Cloud Shell.
+
+The `pal.sh` script is included for reference. You will need to customise to use the correct MPN ID rather than the demo one I've borrowed.
