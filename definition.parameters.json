@@ -1,0 +1,34 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "managedByTenantId": {
+            "value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "mspOfferName": {
+            "value": "Lighthouse Demo: Managed Service for VMs"
+        },
+        "mspOfferDescription": {
+            "value": "Our managed service runs on your unquestioning trust."
+        },
+        "authorizations": {
+            "value": [
+                {
+                    "principalIdDisplayName": "Richard Cheney",
+                    "principalId": "95efbdcd-1e74-4428-a1a0-bf9a8884faa2",
+                    "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c"
+                },
+                {
+                    "principalIdDisplayName": "UK OCP CSA Team",
+                    "principalId": "fe816505-0da8-4150-8bdc-d195057644c3",
+                    "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7"
+                },
+                {
+                    "principalIdDisplayName": "Billing Reader Service Principal",
+                    "principalId": "969ee803-3bff-4de9-b73f-e8b6cb75b9a9",
+                    "roleDefinitionId": "fa23ad8b-c56e-40d8-ac0c-ce449e1d2c64"
+                }
+            ]
+        }
+    }
+}
