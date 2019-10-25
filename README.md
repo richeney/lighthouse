@@ -77,3 +77,13 @@ View the delegations.  Show how you can add another. Look at the Service Provide
 Refresh the last view and the delegated resources should now have disappeared. Also gone from the filter.
 
 Discuss roadmap such as Privileged Identity integration (e..g just in time, just enough access)
+
+## Tips
+
+If you ever change your URIs on the fly, then force curl to skip the cache using:
+
+```bash
+curl -H 'Cache-Control: no-cache' -sSL https://raw.githubusercontent.com/richeney/lighthouse/master/hardcoded.json
+```
+
+You can use this to redirect to a file in Cloud Shell.
