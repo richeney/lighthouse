@@ -4,7 +4,7 @@
     "variables": {
         "managedByTenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
         "mspOfferName": "Lighthouse Demo: Managed Service for VMs",
-        "msnOfferDescription": "Our managed service runs on your unquestioning trust.",
+        "mspOfferDescription": "Our managed service runs on your unquestioning trust.",
         "mspRegistrationName": "[guid(variables('mspOfferName'))]",
         "authorizations": [
             {
