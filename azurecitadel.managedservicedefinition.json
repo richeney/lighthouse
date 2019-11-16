@@ -3,8 +3,8 @@
     "contentVersion": "1.0.0.0",
     "variables": {
         "managedByTenantId": "f246eeb7-b820-4971-a083-9e100e084ed0",
-        "mspOfferName": "Lighthouse Demo: Managed Service for VMs",
-        "mspOfferDescription": "Our managed service runs on your unquestioning trust.",
+        "mspOfferName": "Azure Citadel Managed Service",
+        "mspOfferDescription": "Virtual Machine protection and patching",
         "mspRegistrationName": "[guid(variables('mspOfferName'))]",
         "authorizations": [
             {
