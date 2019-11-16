@@ -9,10 +9,9 @@ export TYPE_SPEED=40
 export NO_WAIT=true
 export PROMPT_TIMEOUT=1
 
-pe 'az account set --subscription 2d31be49-d959-4415-bb65-8aec2c90ba62'
+pe 'az account set --subscription 266282c7-e082-4d48-a6df-56230652be28'
 pe 'az account show'
+pe 'uri=https://raw.githubusercontent.com/richeney/lighthouse/master/azurecitadel.managedservicedefinition.json'
 export PROMPT_TIMEOUT=0
-pe 'jq . < ~/lighthouse/definition.json'
-pe 'jq . < ~/lighthouse/definition.parameters.json'
-
-pe 'az deployment create --name lighthouse --template-file definition.json --parameters "@definition.parameters.json"'
+pe 'curl -sSL $uri | jq .'
+pe 'az deployment create --name lighthouse --template-uri $uri --location westeurope'
