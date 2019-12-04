@@ -40,10 +40,10 @@ Log in as the customer. (I would use a separate profile in Microsoft Edge Chromi
 
 Add the definition. Either copy all of the files into the Cloud Shell (which supports drag and drop) and run the lighthouse.sh command.
 
-Or just run this one to call on the hardcoded.json with no parameter file:
+Or just run this one to call on the azurecitadel.managedservicedefinition.json with no parameter file:
 
 ```bash
-az deployment create --template-uri https://raw.githubusercontent.com/richeney/lighthouse/master/hardcoded.json
+az deployment create --template-uri https://raw.githubusercontent.com/richeney/lighthouse/master/azurecitadel.managedservicedefinition.json --location westeurope
 ```
 
 > Note that this wil be updated once we can add `--scope-type tenant` to deploy this to the Root Tenant Groupp.
@@ -68,7 +68,7 @@ Discuss [PAL](https://aka.ms/partneradminlink) assignments for partner recogniti
 
 ### Customer
 
-View the Activity Log and see th transparency in the audit trail.
+View the Activity Log and see the transparency in the audit trail.
 
 View the delegations.  Show how you can add another. Look at the Service Provider offers, and delete the whole delegation for the demo. Customer retains the ability to revoke access.
 
