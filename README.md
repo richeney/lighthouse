@@ -4,21 +4,29 @@
 
 These are configured for the objectIDs and tenantIDs in microsoft.com, so are unsuitable as they stand for partner demos. Download the files, fork the repo etc. so you can customise your descriptions, objectIDs, tenantID etc.
 
-The (customised) demo-magic.sh script is used for demoing CLI commands so that you don't get distracted by typing ot mistype a command. It is based off a version used at Ready last year in the AKS demos, and does actually execute the commands. Download to your Linux homedir and make executable.  It is used by the other scripts.
-
 ## Templates
 
-Both templates achieve the same result. They create a Lighthouse definition ready for the customer to assign in the Service Providers portal blade.
+Both ARM templates achieve the same result. They create a Lighthouse definition ready for the customer to assign in the Service Providers portal blade. If you are looking for samples that show both definition and assignment (i.e. for deployment under CSP AOBO scenarios) then look at the offical [Azure Lighthouse samples](https://github.com/Azure/Azure-Lighthouse-samples).
 
-Three assignments:
+The azurecitadel.managedservicedefinition.json ARM template is hardcoded so that the definitions can be provisioned with a single CLI call.
+
+The definition.json and definition.parameters.json ARM template pair is more flexible and therefore more suitable for MSPs that have different groups working on different partners, although there is an argument to just have multiple hardcoded ARM templates. 
+
+The parameterisation for Lighthouse is most useful when defining the scope points and definitions for assignments rather than definitions.   
+
+## Authorizations
+
+There are three assignments in the sample files:
 
 1. User Principal as Contributor
 1. Security Group as Reader
 1. Service Principal as Billing Reader
 
-This is just to illustrate the authorisations as a list and throw in a few variants for built in role and security principals.
+This is just to illustrate the authorisations as a list and throw in a few variants for different built in roles and security principals.
 
-If you don't have a service principal then you can create one in the service provider context by logging in and then running `az ad sp create-for-rbac --name http://billingreader --skip-assignment`. (The last switch skips the standard Contributor at subscription scope RBAC assignment.)
+If you don't already have a service principal then you can create one in the service provider context by logging in and then running `az ad sp create-for-rbac --name http://billingreader --skip-assignment`. (The last switch skips the standard Contributor at subscription scope RBAC assignment.)
+
+
 
 ## Demoing
 
