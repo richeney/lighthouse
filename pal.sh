@@ -1,18 +1,19 @@
 #!/bin/bash
 
-cd ~/lighthouse
-source ~/.git-prompt.sh
+if [[ "richeney@azurecitadel.com" != "$(az ad signed-in-user show --query userPrincipalName --output tsv)" ]]
+then
+  az logout 2>/dev/null
+  echo "Logging in as richeney@azurecitadel.com"
+  az login --username richeney@azurecitadel.com --tenant azurecitadel.onmicrosoft.com
+fi
 
-source ~/demo-magic.sh
-export DEMO_PROMPT='\[\033[01;32m\]\w\[\033[01;33m\]$(__git_ps1 " (%s)") \[\033[01;37m\]\$ '
-export TYPE_SPEED=40
-export NO_WAIT=true
-export PROMPT_TIMEOUT=1
+set -x
 
-pe 'az account set --subscription 2d31be49-d959-4415-bb65-8aec2c90ba62'
-pe 'az account show'
-export PROMPT_TIMEOUT=0
+az account set --subscription 2d31be49-d959-4415-bb65-8aec2c90ba62
+az account show
 
-pe 'az extension add --name managementpartner'
-pe 'az managementpartner create --partner-id 5127255'
+az extension add --name managementpartner
+az managementpartner show
+az managementpartner create --partner-id 4827146
+az managementpartner delete --partner-id 4827146
 
