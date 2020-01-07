@@ -4,15 +4,20 @@
 
 These are configured for the objectIDs and tenantIDs in microsoft.com, so are unsuitable as they stand for partner demos. Download the files, fork the repo etc. so you can customise your descriptions, objectIDs, tenantID etc.
 
-## Templates
+## Template
 
-Both ARM templates achieve the same result. They create a Lighthouse definition ready for the customer to assign in the Service Providers portal blade. If you are looking for samples that show both definition and assignment (i.e. for deployment under CSP AOBO scenarios) then look at the offical [Azure Lighthouse samples](https://github.com/Azure/Azure-Lighthouse-samples).
+The azurecitadel.managedservicedefinition.json ARM template is hardcoded so that a Lighthouse definition can be provisioned with a single CLI call.
 
-The azurecitadel.managedservicedefinition.json ARM template is hardcoded so that the definitions can be provisioned with a single CLI call.
+This makes it simple for a "customer" to create the definition using the Cloud Shell, ready for the customer to assign in the Service Providers portal blade.
 
-The definition.json and definition.parameters.json ARM template pair is more flexible and therefore more suitable for MSPs that have different groups working on different partners, although there is an argument to just have multiple hardcoded ARM templates. 
+## Alternative sources of information
 
-The parameterisation for Lighthouse is most useful when defining the scope points and definitions for assignments rather than definitions.   
+Refer to:
+
+* [Marketplace documentation](https://docs.microsoft.com/azure/lighthouse/how-to/publish-managed-services-offers) for information on creating published managed services
+* [Azure Lighthouse samples](https://github.com/Azure/Azure-Lighthouse-samples) for examples that show both definition and assignment (i.e. for deployment under CSP AOBO scenarios)
+
+> ARM parameterisation in a Lighthouse context is arguable more useful when defining the scope points and definitions for assignments, rather than just making the definitions more flexible.
 
 ## Authorizations
 
@@ -22,17 +27,23 @@ There are three assignments in the sample files:
 1. Security Group as Reader
 1. Service Principal as Billing Reader
 
-This is just to illustrate the authorisations as a list and throw in a few variants for different built in roles and security principals.
+They are there to illustrate the authorisations as a list and throw in a few variants for different built in roles and security principals.
 
 If you don't already have a service principal then you can create one in the service provider context by logging in and then running `az ad sp create-for-rbac --name http://billingreader --skip-assignment`. (The last switch skips the standard Contributor at subscription scope RBAC assignment.)
 
+## Demo Recommendations
 
+From experience I would recommend isolating the service provider and customer views, and making them visually different:
 
-## Demoing
+* isolate bookmarks, stored credentials, plus cookies and tokens using multiple browsers or browser profiles
+* use Windows 10's or MacOS' virtual desktops and touchpad gestures, so you can visually slide between the service provider and customer views
+* use different themes in the Azure Portal
 
-Works great with multiple virtual desktops, so you can visually slide between the service provider world and the customer world. Otherwise go slow and make sure everyone knows where they are as it can be confusing skipping around too much.
+Go slow and make sure your audience knows where they are as it can be confusing if you start skipping around too much.
 
-### Service Provider
+## Demo Script
+
+### Service Provider #1
 
 As the Service Provider, you can log in under your context, show the Directory + Subscription filter.
 
@@ -42,7 +53,7 @@ For the service principal, go to App Registrations and then descend down to the 
 
 Alternatively, run the `guids.sh` script to show the commands to pull out the relevant GUIDs using Azure CLI and JMESPATH queries.
 
-### Customer
+### Customer #1
 
 Log in as the customer. (I would use a separate profile in Microsoft Edge Chromium to keep things sane, and then use <https://shell.azure.com> and the portal.)
 
@@ -54,13 +65,13 @@ Or just run this one to call on the azurecitadel.managedservicedefinition.json w
 az deployment create --template-uri https://raw.githubusercontent.com/richeney/lighthouse/master/azurecitadel.managedservicedefinition.json --location westeurope
 ```
 
-> Note that this wil be updated once we can add `--scope-type tenant` to deploy this to the Root Tenant Groupp.
+> Note that this wil be updated once we can add `--scope-type tenant` to deploy this to the Root Tenant Group.
 
 Once deployed then show the Service Providers screen. View the definition, and assign to a subscription, resource group or multiple resource groups.
 
 > You can do this in one hit in the template as per the [samples](https://github.com/Azure/Azure-Lighthouse-samples), but I like the customer experience in the portal.
 
-### Service Provider
+### Service Provider #2
 
 A good time to go through some decks until it settles down.
 
@@ -74,13 +85,13 @@ Make a change, e.g. shutting down a test VM.
 
 Discuss [PAL](https://aka.ms/partneradminlink) assignments for partner recognition for influenced ACR.
 
-### Customer
+### Customer #2
 
 View the Activity Log and see the transparency in the audit trail.
 
 View the delegations.  Show how you can add another. Look at the Service Provider offers, and delete the whole delegation for the demo. Customer retains the ability to revoke access.
 
-### Service Provider
+### Service Provider #3
 
 Refresh the last view and the delegated resources should now have disappeared. Also gone from the filter.
 
@@ -91,7 +102,7 @@ Discuss roadmap such as Privileged Identity integration (e..g just in time, just
 If you ever change your URIs on the fly, then force curl to skip the cache using:
 
 ```bash
-curl -H 'Cache-Control: no-cache' -sSL https://raw.githubusercontent.com/richeney/lighthouse/master/hardcoded.json
+curl -H 'Cache-Control: no-cache' -sSL https://raw.githubusercontent.com/richeney/lighthouse/master/azurecitadel.managedservicedefinition.json
 ```
 
 You can use this to redirect to a file in Cloud Shell.
