@@ -3,29 +3,29 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "managedByTenantId": {
-            "value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+            "value": "f246eeb7-b820-4971-a083-9e100e084ed0"
         },
         "mspOfferName": {
-            "value": "Lighthouse Demo: Managed Service for VMs"
+            "value": "Azure Citadel Managed Service"
         },
         "mspOfferDescription": {
-            "value": "Our managed service runs on your unquestioning trust."
+            "value": "Virtual Machine protection and patching"
         },
         "authorizations": {
             "value": [
                 {
-                    "principalIdDisplayName": "Richard Cheney",
-                    "principalId": "95efbdcd-1e74-4428-a1a0-bf9a8884faa2",
+                    "principalIdDisplayName": "Richard Cheney (User Principal)",
+                    "principalId": "2a7d8d38-291f-4e6a-88c7-2f8e17c8b5ca",
                     "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c"
                 },
                 {
-                    "principalIdDisplayName": "UK OCP CSA Team",
-                    "principalId": "fe816505-0da8-4150-8bdc-d195057644c3",
-                    "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7"
+                    "principalIdDisplayName": "Virtual Machine Admins (Security Group)",
+                    "principalId": "88515d1f-e386-4a23-afcc-78b012f805f9",
+                    "roleDefinitionId": "9980e02c-c2be-4d73-94e8-173b1dc7cf3c"
                 },
                 {
-                    "principalIdDisplayName": "Billing Reader Service Principal",
-                    "principalId": "969ee803-3bff-4de9-b73f-e8b6cb75b9a9",
+                    "principalIdDisplayName": "Billing Reader (Service Principal)",
+                    "principalId": "5d6d7065-3ea4-4b69-8394-8643a48b4772",
                     "roleDefinitionId": "fa23ad8b-c56e-40d8-ac0c-ce449e1d2c64"
                 }
             ]
