@@ -1,9 +1,5 @@
 locals {
-    names = var.names ? var.names | list(var.name)
-}
-
-provider "azurerm" {
-    version = "~>1.44.0"
+    names = length(var.names) > 0 ? var.names : list(var.name)
 }
 
 data "azurerm_resource_group" "vm" {
@@ -31,7 +27,7 @@ resource "azurerm_virtual_machine" "vm" {
     resource_group_name   =  data.azurerm_resource_group.vm.name
     tags                  =  data.azurerm_resource_group.vm.tags
 
-    network_interface_ids = [ azurerm_network_interface.vm.id ]
+    network_interface_ids = [ azurerm_network_interface.vm[each.key].id ]
     vm_size               = "Standard_B1ls"
 
     delete_os_disk_on_termination       = true
