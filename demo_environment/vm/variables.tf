@@ -3,10 +3,10 @@ variable "resource_group" {}
 variable "subnet_id" {}
 
 variable "name" {
-    default = "myVM"
+  default = "myVM"
 }
 
 variable "names" {
-    type    = list
-    default = []
+  type    = list
+  default = []
 }
