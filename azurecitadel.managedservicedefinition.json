@@ -13,6 +13,11 @@
                 "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c"
             },
             {
+                "principalIdDisplayName": "Richard Cheney (User Principal)",
+                "principalId": "2a7d8d38-291f-4e6a-88c7-2f8e17c8b5ca",
+                "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46"
+            },
+            {
                 "principalIdDisplayName": "Virtual Machine Admins (Security Group)",
                 "principalId": "88515d1f-e386-4a23-afcc-78b012f805f9",
                 "roleDefinitionId": "9980e02c-c2be-4d73-94e8-173b1dc7cf3c"

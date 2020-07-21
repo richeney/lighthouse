@@ -11,5 +11,5 @@ az account show --output jsonc
 echo "uri=https://raw.githubusercontent.com/richeney/lighthouse/master/azurecitadel.managedservicedefinition.json"
 uri=https://raw.githubusercontent.com/richeney/lighthouse/master/azurecitadel.managedservicedefinition.json
 
-echo "az deployment create --name lighthouse --template-uri $uri --location westeurope"
-az deployment create --name lighthouse --template-uri $uri --location westeurope
+echo "az deployment sub create --name lighthouse --template-uri $uri --location westeurope"
+az deployment sub create --name lighthouse --template-uri $uri --location westeurope

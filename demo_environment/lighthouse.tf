@@ -1,13 +1,5 @@
 provider "azurerm" {
   version = "~>1.44.0"
-
-  // I use these to ensure I am deploying to the right place.
-  // Assuming CLI or CloudShell authentication, or service principal
-  // with exported ARM_CLIENT_ID and ARM_CLIENT_SECRET
-  tenant_id       = var.tenant_id
-  subscription_id = var.subscription_id
-  client_id       = var.client_id
-  client_secret   = var.client_secret
 }
 
 //=======================================================================
