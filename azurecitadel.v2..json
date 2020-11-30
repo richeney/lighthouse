@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "variables": {
+        "managedByTenantId": "f246eeb7-b820-4971-a083-9e100e084ed0",
+        "mspOfferName": "Azure Citadel Managed Service",
+        "mspOfferDescription": "Virtual Machine protection and patching",
+        "mspRegistrationName": "[guid(variables('mspOfferName'))]",
+        "authorizations": [
+            {
+                "principalIdDisplayName": "Richard Cheney (User Principal)",
+                "principalId": "2a7d8d38-291f-4e6a-88c7-2f8e17c8b5ca",
+                "roleDefinitionId": "[variables('roleDefinitionId').Contributor]"
+            },
+            {
+                "principalIdDisplayName": "Richard Cheney (User Principal)",
+                "principalId": "2a7d8d38-291f-4e6a-88c7-2f8e17c8b5ca",
+                "roleDefinitionId": "[variables('roleDefinitionId').ManagedServicesRegistrationAssignmentDeleteRole]"
+            },
+            {
+                "principalIdDisplayName": "Virtual Machine Admins (Security Group)",
+                "principalId": "88515d1f-e386-4a23-afcc-78b012f805f9",
+                "roleDefinitionId": "[variables('roleDefinitionId').VirtualMachineContributor]"
+            },
+            {
+                "principalIdDisplayName": "Virtual Machine Admins (Security Group)",
+                "principalId": "88515d1f-e386-4a23-afcc-78b012f805f9",
+                "roleDefinitionId": "[variables('roleDefinitionId').BackupContributor]"
+            },
+            {
+                "principalIdDisplayName": "Billing Reader (Service Principal)",
+                "principalId": "5d6d7065-3ea4-4b69-8394-8643a48b4772",
+                "roleDefinitionId": "[variables('roleDefinitionId').BillingReader]"
+            }
+        ],
+        "roleDefinitionId": {
+            "BackupContributor": "5e467623-bb1f-42f4-a55d-6e525e11384b",
+            "BillingReader": "fa23ad8b-c56e-40d8-ac0c-ce449e1d2c64",
+            "Contributor": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+            "ManagedServicesRegistrationAssignmentDeleteRole": "91c1777a-f3dc-4fae-b103-61d183457e46",
+            "VirtualMachineContributor": "9980e02c-c2be-4d73-94e8-173b1dc7cf3c"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.ManagedServices/registrationDefinitions",
+            "apiVersion": "2019-06-01",
+            "name": "[variables('mspRegistrationName')]",
+            "properties": {
+                "registrationDefinitionName": "[variables('mspOfferName')]",
+                "description": "[variables('mspOfferDescription')]",
+                "managedByTenantId": "[variables('managedByTenantId')]",
+                "authorizations": "[variables('authorizations')]"
+            }
+        }
+    ]
+}
