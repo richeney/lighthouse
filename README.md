@@ -6,7 +6,7 @@ These are configured for the objectIDs and tenantIDs in microsoft.com, so are un
 
 ## Template
 
-The azurecitadel.v1.json ARM template is hardcoded so that a Lighthouse definition can be provisioned with a single CLI call.
+The azurecitadel.json ARM template is hardcoded so that a Lighthouse definition can be provisioned with a single CLI call.
 
 This makes it simple for a "customer" to create the definition using the Cloud Shell, ready for the customer to assign in the Service Providers portal blade.
 
@@ -57,12 +57,12 @@ Alternatively, run the `guids.sh` script to show the commands to pull out the re
 
 Log in as the customer. (I would use a separate profile in Microsoft Edge to keep things sane, and then use <https://shell.azure.com> and the portal.)
 
-Add the definition. Either copy all of the files into the Cloud Shell (which supports drag and drop) and run the lighthouse.v1.sh command.
+Add the definition. Either copy all of the files into the Cloud Shell (which supports drag and drop) and run the lighthouse.sh command.
 
-Or just run this one to call on the azurecitadel.v1.json with no parameter file:
+Or just run this one to call on the azurecitadel.json with no parameter file:
 
 ```bash
-az deployment create --template-uri https://raw.githubusercontent.com/richeney/lighthouse/master/azurecitadel.v1.json --location westeurope
+az deployment create --template-uri https://raw.githubusercontent.com/richeney/lighthouse/master/azurecitadel.json --location westeurope
 ```
 
 > Note that this wil be updated once we can add `--scope-type tenant` to deploy this to the Root Tenant Group.
@@ -102,7 +102,7 @@ Discuss roadmap such as Privileged Identity integration (e..g just in time, just
 If you ever change your URIs on the fly, then force curl to skip the cache using:
 
 ```bash
-curl -H 'Cache-Control: no-cache' -sSL https://raw.githubusercontent.com/richeney/lighthouse/master/azurecitadel.v1.json
+curl -H 'Cache-Control: no-cache' -sSL https://raw.githubusercontent.com/richeney/lighthouse/master/azurecitadel.json
 ```
 
 You can use this to redirect to a file in Cloud Shell.
