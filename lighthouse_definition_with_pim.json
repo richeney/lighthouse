@@ -14,10 +14,15 @@
             "Reader": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
             "ManagedServicesRegistrationAssignmentDeleteRole": "91c1777a-f3dc-4fae-b103-61d183457e46"
         },
-        "objectId": {
-            "richeney": "4e7bbecc-07af-4b0b-a512-70c24adef6cd",
-            "consultants": "11a297dd-edbf-49b6-a935-968f147415e1",
-            "approvers": "936bca55-35a6-420b-82ec-4396682004cc"
+        "user": {
+            "richeney": "4e7bbecc-07af-4b0b-a512-70c24adef6cd"
+        },
+        "group": {
+            "Consultants": "11a297dd-edbf-49b6-a935-968f147415e1",
+            "Approvers": "936bca55-35a6-420b-82ec-4396682004cc"
+        },
+        "serviceprincipal": {
+            "BillingReader": "5d37df3d-4e86-4c24-9b05-417e5ae20bc4"
         }
     },
     "resources": [
@@ -32,17 +37,17 @@
                 "authorizations": [
                     {
                         "principalIdDisplayName": "Lighthouse Admins",
-                        "principalId": "[variables('objectId').approvers]",
+                        "principalId": "[variables('group').Approvers]",
                         "roleDefinitionId": "[variables('roleDefinitionId').ManagedServicesRegistrationAssignmentDeleteRole]"
                     },
                     {
                         "principalIdDisplayName": "Consultants",
-                        "principalId": "[variables('objectId').consultants]",
+                        "principalId": "[variables('group').Consultants]",
                         "roleDefinitionId": "[variables('roleDefinitionId').Reader]"
                     },
                     {
-                        "principalIdDisplayName": "Billing Reader (Service Principal)",
-                        "principalId": "5d6d7065-3ea4-4b69-8394-8643a48b4772",
+                        "principalIdDisplayName": "Billing Reader",
+                        "principalId": "[variables('serviceprincipal').BillingReader]",
                         "roleDefinitionId": "[variables('roleDefinitionId').BillingReader]"
                     }
                 ],
@@ -53,12 +58,12 @@
                             "maximumActivationDuration": "PT4H",
                             "managedByTenantApprovers": [
                                 {
-                                    "principalId": "[variables('objectId').approvers]",
+                                    "principalId": "[variables('group').Approvers]",
                                     "principalIdDisplayName": "Lighthouse PIM Approvers"
                                 }
                             ]
                         },
-                        "principalId": "[variables('objectId').consultants]",
+                        "principalId": "[variables('group').Consultants]",
                         "principalIdDisplayName": "Consultants",
                         "roleDefinitionId": "[variables('roleDefinitionId').BackupContributor]"
                     },
@@ -68,12 +73,12 @@
                             "maximumActivationDuration": "PT8H",
                             "managedByTenantApprovers": [
                                 {
-                                    "principalId": "[variables('objectId').approvers]",
+                                    "principalId": "[variables('group').Approvers]",
                                     "principalIdDisplayName": "Lighthouse PIM Approvers"
                                 }
                             ]
                         },
-                        "principalId": "[variables('objectId').consultants]",
+                        "principalId": "[variables('group').Consultants]",
                         "principalIdDisplayName": "Consultants",
                         "roleDefinitionId": "[variables('roleDefinitionId').VirtualMachineContributor]"
                     }
