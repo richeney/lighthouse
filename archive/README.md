@@ -1,14 +1,5 @@
 # Azure Lighthouse demo sample
 
-* [Lighthouse Registration Definition Schema](https://docs.microsoft.com/rest/api/managedservices/registration-definitions)
-* [Sample template file](https://github.com/Azure/Azure-Lighthouse-samples/blob/master/templates/delegated-resource-management-eligible-authorizations/subscription/subscription-managing-tenant-approvers.json)
-* [Sample parameters file](https://github.com/Azure/Azure-Lighthouse-samples/blob/master/templates/delegated-resource-management-eligible-authorizations/subscription/subscription-managing-tenant-approvers.parameters.json)
-
-
----
-
-***DELETE EVERYTHING BELOW HERE? ALSO IN THE ARCHIVE FOLDER***
-
 ## Setup
 
 These are configured for the objectIDs and tenantIDs in microsoft.com, so are unsuitable as they stand for partner demos. Download the files, fork the repo etc. so you can customise your descriptions, objectIDs, tenantID etc.
