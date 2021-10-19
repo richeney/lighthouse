@@ -56,16 +56,21 @@
                         "justInTimeAccessPolicy": {
                             "multiFactorAuthProvider": "Azure",
                             "maximumActivationDuration": "PT4H",
-                            "managedByTenantApprovers": [
-                                {
-                                    "principalId": "[variables('group').Approvers]",
-                                    "principalIdDisplayName": "Lighthouse PIM Approvers"
-                                }
-                            ]
+                            "managedByTenantApprovers": []
                         },
                         "principalId": "[variables('group').Consultants]",
                         "principalIdDisplayName": "Consultants",
                         "roleDefinitionId": "[variables('roleDefinitionId').BackupContributor]"
+                    },
+                    {
+                        "justInTimeAccessPolicy": {
+                            "multiFactorAuthProvider": "Azure",
+                            "maximumActivationDuration": "PT8H",
+                            "managedByTenantApprovers": []
+                        },
+                        "principalId": "[variables('group').Consultants]",
+                        "principalIdDisplayName": "Consultants",
+                        "roleDefinitionId": "[variables('roleDefinitionId').VirtualMachineContributor]"
                     },
                     {
                         "justInTimeAccessPolicy": {
@@ -80,7 +85,7 @@
                         },
                         "principalId": "[variables('group').Consultants]",
                         "principalIdDisplayName": "Consultants",
-                        "roleDefinitionId": "[variables('roleDefinitionId').VirtualMachineContributor]"
+                        "roleDefinitionId": "[variables('roleDefinitionId').Contributor]"
                     }
                 ]
             }
