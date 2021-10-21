@@ -1,0 +1,94 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "variables": {
+        "managedByTenantId": "655f0684-29ae-466e-8324-2ab22497254f",
+        "mspOfferName": "Azure Citadel Managed Service",
+        "mspOfferDescription": "Virtual Machine protection and patching",
+        "mspRegistrationName": "[guid(variables('mspOfferName'))]",
+        "roleDefinitionId": {
+            "Contributor": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+            "BackupContributor": "5e467623-bb1f-42f4-a55d-6e525e11384b",
+            "VirtualMachineContributor": "9980e02c-c2be-4d73-94e8-173b1dc7cf3c",
+            "BillingReader": "fa23ad8b-c56e-40d8-ac0c-ce449e1d2c64",
+            "Reader": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
+            "ManagedServicesRegistrationAssignmentDeleteRole": "91c1777a-f3dc-4fae-b103-61d183457e46"
+        },
+        "user": {
+            "richeney": "4e7bbecc-07af-4b0b-a512-70c24adef6cd"
+        },
+        "group": {
+            "Consultants": "11a297dd-edbf-49b6-a935-968f147415e1",
+            "Approvers": "936bca55-35a6-420b-82ec-4396682004cc"
+        },
+        "serviceprincipal": {
+            "BillingReader": "5d37df3d-4e86-4c24-9b05-417e5ae20bc4"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.ManagedServices/registrationDefinitions",
+            "apiVersion": "2020-02-01-preview",
+            "name": "[variables('mspRegistrationName')]",
+            "properties": {
+                "registrationDefinitionName": "[variables('mspOfferName')]",
+                "description": "[variables('mspOfferDescription')]",
+                "managedByTenantId": "[variables('managedByTenantId')]",
+                "authorizations": [
+                    {
+                        "principalIdDisplayName": "Lighthouse Admins",
+                        "principalId": "[variables('group').Approvers]",
+                        "roleDefinitionId": "[variables('roleDefinitionId').ManagedServicesRegistrationAssignmentDeleteRole]"
+                    },
+                    {
+                        "principalIdDisplayName": "Consultants",
+                        "principalId": "[variables('group').Consultants]",
+                        "roleDefinitionId": "[variables('roleDefinitionId').Reader]"
+                    },
+                    {
+                        "principalIdDisplayName": "Billing Reader",
+                        "principalId": "[variables('serviceprincipal').BillingReader]",
+                        "roleDefinitionId": "[variables('roleDefinitionId').BillingReader]"
+                    }
+                ],
+                "eligibleAuthorizations": [
+                    {
+                        "justInTimeAccessPolicy": {
+                            "multiFactorAuthProvider": "Azure",
+                            "maximumActivationDuration": "PT4H",
+                            "managedByTenantApprovers": []
+                        },
+                        "principalId": "[variables('group').Consultants]",
+                        "principalIdDisplayName": "Consultants",
+                        "roleDefinitionId": "[variables('roleDefinitionId').BackupContributor]"
+                    },
+                    {
+                        "justInTimeAccessPolicy": {
+                            "multiFactorAuthProvider": "Azure",
+                            "maximumActivationDuration": "PT8H",
+                            "managedByTenantApprovers": []
+                        },
+                        "principalId": "[variables('group').Consultants]",
+                        "principalIdDisplayName": "Consultants",
+                        "roleDefinitionId": "[variables('roleDefinitionId').VirtualMachineContributor]"
+                    },
+                    {
+                        "justInTimeAccessPolicy": {
+                            "multiFactorAuthProvider": "Azure",
+                            "maximumActivationDuration": "PT8H",
+                            "managedByTenantApprovers": [
+                                {
+                                    "principalId": "[variables('group').Approvers]",
+                                    "principalIdDisplayName": "Lighthouse PIM Approvers"
+                                }
+                            ]
+                        },
+                        "principalId": "[variables('group').Consultants]",
+                        "principalIdDisplayName": "Consultants",
+                        "roleDefinitionId": "[variables('roleDefinitionId').Contributor]"
+                    }
+                ]
+            }
+        }
+    ]
+}

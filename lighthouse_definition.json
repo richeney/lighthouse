@@ -2,16 +2,11 @@
     "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "variables": {
-        "managedByTenantId": "f246eeb7-b820-4971-a083-9e100e084ed0",
+        "managedByTenantId": "655f0684-29ae-466e-8324-2ab22497254f",
         "mspOfferName": "Azure Citadel Managed Service",
         "mspOfferDescription": "Virtual Machine protection and patching",
         "mspRegistrationName": "[guid(variables('mspOfferName'))]",
         "authorizations": [
-            {
-                "principalIdDisplayName": "Richard Cheney (User Principal)",
-                "principalId": "2a7d8d38-291f-4e6a-88c7-2f8e17c8b5ca",
-                "roleDefinitionId": "[variables('roleDefinitionId').Contributor]"
-            },
             {
                 "principalIdDisplayName": "Richard Cheney (User Principal)",
                 "principalId": "2a7d8d38-291f-4e6a-88c7-2f8e17c8b5ca",
