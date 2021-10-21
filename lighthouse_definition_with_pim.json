@@ -39,6 +39,10 @@
                         "principalIdDisplayName": "Lighthouse Admins",
                         "principalId": "[variables('group').Approvers]",
                         "roleDefinitionId": "[variables('roleDefinitionId').ManagedServicesRegistrationAssignmentDeleteRole]"
+                    },                    {
+                        "principalIdDisplayName": "Lighthouse Admins",
+                        "principalId": "[variables('group').Approvers]",
+                        "roleDefinitionId": "[variables('roleDefinitionId').Reader]"
                     },
                     {
                         "principalIdDisplayName": "Consultants",
