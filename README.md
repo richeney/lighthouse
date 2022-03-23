@@ -18,19 +18,37 @@ Both are Visual Studio subscriptions.
 ## Lighthouse Customer preparation
 
 1. Clone the repo
-    * Open Cloud Shell
-    * `git clone https://github.com/richeney/lighthouse`
+
+    In Cloud Shell (or similar).
+
+    ```shell
+    git clone https://github.com/richeney/lighthouse
+    ```
 
 1. Create example resource groups and resources
-    * `cd lighthouse\demo_environment`
-    * `terraform init`
-    * `terraform apply --auto-approve`
 
-       This will create a few resource groups and a few resources. Note that you can always remove the environment later by using `terraform destroy` in the same directory.
+    ```shell
+    cd lighthouse/demo_environment
+    ```
 
-1. Move back up to the main report directory with `cd ..`
+    ```shell
+    terraform init
+    ```
+
+    ```shell
+    terraform apply --auto-approve
+    ```
+
+    This will create a few resource groups and a few resources. Note that you can always remove the environment later by using `terraform destroy` in the same directory.
+
+1. Move back up to the main report directory
+
+    ```shell
+    cd ..
+    ```
+
 1. Customise the Azure Lighthouse definition template
-    * Edit lighthouse_definition.json
+    * Edit `lighthouse_definition.json`
     * Change the managedByTenantId to the MSP's tenantId
     * Configure the objectIds and cosmetic descriptions in the authorizations array
 
@@ -40,13 +58,17 @@ Both are Visual Studio subscriptions.
 
     Also note the role to allow the MSP to delete delegations from their side.
 
+    PIM durations can be set as well as auto-approved and approve by roles as per the example.
+
 1. Create the Azure Lighthouse definition
 
     ```shell
     az deployment sub create --name lighthouse --template-file lighthouse_definition.json --location westeurope
     ```
 
-    Note that wil ARM / Bicep / Terraform etc. you can create the definition and create the assignments, but this template only creates the definition in order to demonstrate the customer experience. Note also that marketplace published services are an option rather than creating a Lighthouse definition.
+    Note that wil ARM / Bicep / Terraform etc. you can create the definition and create the assignments, but this template only creates the definition in order to demonstrate the customer experience in the portal.
+
+    Note also that marketplace published services are an option as opposed to creating a Lighthouse definition via infrastructure as code.
 
 ## Lighthouse Customer
 
