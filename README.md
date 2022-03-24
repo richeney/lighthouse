@@ -68,7 +68,7 @@ Both are Visual Studio subscriptions.
 
     Note that wil ARM / Bicep / Terraform etc. you can create the definition and create the assignments, but this template only creates the definition in order to demonstrate the customer experience in the portal.
 
-    Note also that marketplace published services are an option as opposed to creating a Lighthouse definition via infrastructure as code.
+    Note also that marketplace published services are an option as opposed to creating a Lighthouse definition via infrastructure as code. They can be public or exposed to an list of specified customers.
 
 ## Lighthouse Customer
 
