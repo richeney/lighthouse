@@ -12,7 +12,8 @@
             "VirtualMachineContributor": "9980e02c-c2be-4d73-94e8-173b1dc7cf3c",
             "BillingReader": "fa23ad8b-c56e-40d8-ac0c-ce449e1d2c64",
             "Reader": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
-            "ManagedServicesRegistrationAssignmentDeleteRole": "91c1777a-f3dc-4fae-b103-61d183457e46"
+            "ManagedServicesRegistrationAssignmentDeleteRole": "91c1777a-f3dc-4fae-b103-61d183457e46",
+            "SupportRequestContributor": "cfd33db0-3dd1-45e3-aa9d-cdbdf3b6f24e"
         },
         "user": {
             "richeney": "4e7bbecc-07af-4b0b-a512-70c24adef6cd"
@@ -48,6 +49,10 @@
                         "principalIdDisplayName": "Consultants",
                         "principalId": "[variables('group').Consultants]",
                         "roleDefinitionId": "[variables('roleDefinitionId').Reader]"
+                    },                    {
+                        "principalIdDisplayName": "Consultants",
+                        "principalId": "[variables('group').Consultants]",
+                        "roleDefinitionId": "[variables('roleDefinitionId').SupportRequestContributor]"
                     },
                     {
                         "principalIdDisplayName": "Billing Reader",
