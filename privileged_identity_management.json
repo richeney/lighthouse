@@ -2,10 +2,9 @@
     "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "variables": {
-        "managedByTenantId": "655f0684-29ae-466e-8324-2ab22497254f",
-        "mspOfferName": "Azure Citadel Managed Service",
-        "mspOfferDescription": "Virtual Machine protection and patching",
-        "mspRegistrationName": "[guid(variables('mspOfferName'))]",
+        "publisher": "Azure Citadel",
+        "name": "Standard Managed Service",
+        "guid": "[guid(concat(variables('publisher'), variables('name')))]",
         "roleDefinitionId": {
             "Contributor": "b24988ac-6180-42a0-ab88-20f7382dd24c",
             "BackupContributor": "5e467623-bb1f-42f4-a55d-6e525e11384b",
@@ -15,48 +14,55 @@
             "ManagedServicesRegistrationAssignmentDeleteRole": "91c1777a-f3dc-4fae-b103-61d183457e46",
             "SupportRequestContributor": "cfd33db0-3dd1-45e3-aa9d-cdbdf3b6f24e"
         },
-        "user": {
-            "richeney": "4e7bbecc-07af-4b0b-a512-70c24adef6cd"
-        },
-        "group": {
-            "Consultants": "11a297dd-edbf-49b6-a935-968f147415e1",
-            "Approvers": "936bca55-35a6-420b-82ec-4396682004cc"
+        "securityGroup": {
+            "admins": {
+                "objectId": "b3333b16-f8de-4624-ad57-52b494d82fc4",
+                "name": "Azure Lighthouse Admins"
+            },
+            "consultants": {
+                "objectId": "11a297dd-edbf-49b6-a935-968f147415e1",
+                "name": "Managed Service Consultants"
+            },
+            "approvers": {
+                "objectId": "936bca55-35a6-420b-82ec-4396682004cc",
+                "name": "Managed Service Team Leaders"
+            }
         },
         "serviceprincipal": {
-            "BillingReader": "5d37df3d-4e86-4c24-9b05-417e5ae20bc4"
+            "billingReader": {
+                "objectId": "0d609922-5b59-4513-8be0-dda69d9ade0e",
+                "name": "Custom Azure Billing Service"
+            }
         }
     },
     "resources": [
         {
             "type": "Microsoft.ManagedServices/registrationDefinitions",
-            "apiVersion": "2020-02-01-preview",
-            "name": "[variables('mspRegistrationName')]",
+            "apiVersion": "2022-01-01-preview",
+            "name": "[variables('guid')]",
             "properties": {
-                "registrationDefinitionName": "[variables('mspOfferName')]",
-                "description": "[variables('mspOfferDescription')]",
-                "managedByTenantId": "[variables('managedByTenantId')]",
+                "registrationDefinitionName": "[variables('name')]",
+                "description": "Virtual Machine protection and patching plus custom Azure billing service.",
+                "managedByTenantId": "655f0684-29ae-466e-8324-2ab22497254f",
                 "authorizations": [
                     {
-                        "principalIdDisplayName": "Lighthouse Admins",
-                        "principalId": "[variables('group').Approvers]",
+                        "principalIdDisplayName": "[variables('securityGroup').admins.name]",
+                        "principalId": "[variables('securityGroup').admins.objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').ManagedServicesRegistrationAssignmentDeleteRole]"
-                    },                    {
-                        "principalIdDisplayName": "Lighthouse Admins",
-                        "principalId": "[variables('group').Approvers]",
+                    },
+                    {
+                        "principalIdDisplayName": "[variables('securityGroup').consultants.name]",
+                        "principalId": "[variables('securityGroup').consultants.objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').Reader]"
                     },
                     {
-                        "principalIdDisplayName": "Consultants",
-                        "principalId": "[variables('group').Consultants]",
-                        "roleDefinitionId": "[variables('roleDefinitionId').Reader]"
-                    },                    {
-                        "principalIdDisplayName": "Consultants",
-                        "principalId": "[variables('group').Consultants]",
+                        "principalIdDisplayName": "[variables('securityGroup').consultants.name]",
+                        "principalId": "[variables('securityGroup').consultants.objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').SupportRequestContributor]"
                     },
                     {
-                        "principalIdDisplayName": "Billing Reader",
-                        "principalId": "[variables('serviceprincipal').BillingReader]",
+                        "principalIdDisplayName": "[variables('serviceprincipal').BillingReader.name]",
+                        "principalId": "[variables('serviceprincipal').BillingReader.objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').BillingReader]"
                     }
                 ],
@@ -67,8 +73,8 @@
                             "maximumActivationDuration": "PT4H",
                             "managedByTenantApprovers": []
                         },
-                        "principalId": "[variables('group').Consultants]",
-                        "principalIdDisplayName": "Consultants",
+                        "principalIdDisplayName": "[variables('securityGroup').consultants.name]",
+                        "principalId": "[variables('securityGroup').consultants.objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').BackupContributor]"
                     },
                     {
@@ -77,8 +83,8 @@
                             "maximumActivationDuration": "PT8H",
                             "managedByTenantApprovers": []
                         },
-                        "principalId": "[variables('group').Consultants]",
-                        "principalIdDisplayName": "Consultants",
+                        "principalIdDisplayName": "[variables('securityGroup').consultants.name]",
+                        "principalId": "[variables('securityGroup').consultants.objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').VirtualMachineContributor]"
                     },
                     {
@@ -87,13 +93,13 @@
                             "maximumActivationDuration": "PT8H",
                             "managedByTenantApprovers": [
                                 {
-                                    "principalId": "[variables('group').Approvers]",
-                                    "principalIdDisplayName": "Lighthouse PIM Approvers"
+                                    "principalId": "[variables('securityGroup').approvers.objectId]",
+                                    "principalIdDisplayName": "[variables('securityGroup').approvers.name]"
                                 }
                             ]
                         },
-                        "principalId": "[variables('group').Consultants]",
-                        "principalIdDisplayName": "Consultants",
+                        "principalIdDisplayName": "[variables('securityGroup').consultants.name]",
+                        "principalId": "[variables('securityGroup').consultants.objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').Contributor]"
                     }
                 ]
