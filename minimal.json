@@ -7,6 +7,7 @@
         "guid": "[guid(concat(variables('publisher'), variables('name')))]",
         "roleDefinitionId": {
             "ManagedServicesRegistrationAssignmentDeleteRole": "91c1777a-f3dc-4fae-b103-61d183457e46",
+            "Reader": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
             "SupportRequestContributor": "cfd33db0-3dd1-45e3-aa9d-cdbdf3b6f24e"
         },
         "securityGroup": {
@@ -34,6 +35,11 @@
                         "principalIdDisplayName": "[variables('securityGroup').admins.name]",
                         "principalId": "[variables('securityGroup').admins.objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').ManagedServicesRegistrationAssignmentDeleteRole]"
+                    },
+                    {
+                        "principalIdDisplayName": "[variables('securityGroup').consultants.name]",
+                        "principalId": "[variables('securityGroup').consultants.objectId]",
+                        "roleDefinitionId": "[variables('roleDefinitionId').Reader]"
                     },
                     {
                         "principalIdDisplayName": "[variables('securityGroup').consultants.name]",
