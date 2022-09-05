@@ -37,6 +37,23 @@
                 "objectId": "c824a33a-7b01-4571-a3c9-894d882fa2d6",
                 "name": "Service principal - http://terraform"
             }
+        },
+        "approval": {
+            "selfApprove": {
+                "multiFactorAuthProvider": "Azure",
+                "maximumActivationDuration": "PT4H",
+                "managedByTenantApprovers": []
+            },
+            "approvalRequired": {
+                "multiFactorAuthProvider": "Azure",
+                "maximumActivationDuration": "PT8H",
+                "managedByTenantApprovers": [
+                    {
+                        "principalId": "[variables('securityGroup').approvers.objectId]",
+                        "principalIdDisplayName": "[variables('securityGroup').approvers.name]"
+                    }
+                ]
+            }
         }
     },
     "resources": [
@@ -77,36 +94,19 @@
                 ],
                 "eligibleAuthorizations": [
                     {
-                        "justInTimeAccessPolicy": {
-                            "multiFactorAuthProvider": "Azure",
-                            "maximumActivationDuration": "PT4H",
-                            "managedByTenantApprovers": []
-                        },
+                        "justInTimeAccessPolicy": "[variables('approval').selfApprove]",
                         "principalIdDisplayName": "[variables('securityGroup').consultants.name]",
                         "principalId": "[variables('securityGroup').consultants.objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').BackupContributor]"
                     },
                     {
-                        "justInTimeAccessPolicy": {
-                            "multiFactorAuthProvider": "Azure",
-                            "maximumActivationDuration": "PT4H",
-                            "managedByTenantApprovers": []
-                        },
+                        "justInTimeAccessPolicy": "[variables('approval').selfApprove]",
                         "principalIdDisplayName": "[variables('securityGroup').consultants.name]",
                         "principalId": "[variables('securityGroup').consultants.objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').VirtualMachineContributor]"
                     },
                     {
-                        "justInTimeAccessPolicy": {
-                            "multiFactorAuthProvider": "Azure",
-                            "maximumActivationDuration": "PT8H",
-                            "managedByTenantApprovers": [
-                                {
-                                    "principalId": "[variables('securityGroup').approvers.objectId]",
-                                    "principalIdDisplayName": "[variables('securityGroup').approvers.name]"
-                                }
-                            ]
-                        },
+                        "justInTimeAccessPolicy": "[variables('approval').approvalRequired]",
                         "principalIdDisplayName": "[variables('securityGroup').consultants.name]",
                         "principalId": "[variables('securityGroup').consultants.objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').Contributor]"

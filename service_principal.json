@@ -2,60 +2,54 @@
     "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "variables": {
-        "publisher": "Azure Citadel",
         "name": "Basic Support Service + Terraform deployment pipelines",
-        "guid": "[guid(concat(variables('publisher'), variables('name')))]",
         "roleDefinitionId": {
             "Contributor": "b24988ac-6180-42a0-ab88-20f7382dd24c",
             "ManagedServicesRegistrationAssignmentDeleteRole": "91c1777a-f3dc-4fae-b103-61d183457e46",
             "Reader": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
             "SupportRequestContributor": "cfd33db0-3dd1-45e3-aa9d-cdbdf3b6f24e"
         },
-        "securityGroup": {
-            "admins": {
-                "objectId": "b3333b16-f8de-4624-ad57-52b494d82fc4",
-                "name": "Azure Lighthouse Admins"
-            },
-            "consultants": {
-                "objectId": "11a297dd-edbf-49b6-a935-968f147415e1",
-                "name": "Managed Service Consultants"
-            }
+        "admins": {
+            "objectId": "b3333b16-f8de-4624-ad57-52b494d82fc4",
+            "name": "Azure Lighthouse Admins"
         },
-        "servicePrincipal": {
-            "terraform": {
-                "objectId": "c824a33a-7b01-4571-a3c9-894d882fa2d6",
-                "name": "Service principal - http://terraform"
-            }
+        "consultants": {
+            "objectId": "11a297dd-edbf-49b6-a935-968f147415e1",
+            "name": "Managed Service Consultants"
+        },
+        "terraform": {
+            "objectId": "c824a33a-7b01-4571-a3c9-894d882fa2d6",
+            "name": "Service principal - http://terraform"
         }
     },
     "resources": [
         {
             "type": "Microsoft.ManagedServices/registrationDefinitions",
             "apiVersion": "2019-06-01",
-            "name": "[variables('guid')]",
+            "name": "[guid(concat('Azure Citadel - ', variables('name')))]",
             "properties": {
                 "registrationDefinitionName": "[variables('name')]",
                 "description": "Azure support services for call logging and call management (L0/L1).",
                 "managedByTenantId": "655f0684-29ae-466e-8324-2ab22497254f",
                 "authorizations": [
                     {
-                        "principalIdDisplayName": "[variables('securityGroup').admins.name]",
-                        "principalId": "[variables('securityGroup').admins.objectId]",
+                        "principalIdDisplayName": "[variables('admins').name]",
+                        "principalId": "[variables('admins').objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').ManagedServicesRegistrationAssignmentDeleteRole]"
                     },
                     {
-                        "principalIdDisplayName": "[variables('securityGroup').consultants.name]",
-                        "principalId": "[variables('securityGroup').consultants.objectId]",
+                        "principalIdDisplayName": "[variables('consultants').name]",
+                        "principalId": "[variables('consultants').objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').Reader]"
                     },
                     {
-                        "principalIdDisplayName": "[variables('securityGroup').consultants.name]",
-                        "principalId": "[variables('securityGroup').consultants.objectId]",
+                        "principalIdDisplayName": "[variables('consultants').name]",
+                        "principalId": "[variables('consultants').objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').SupportRequestContributor]"
                     },
                     {
-                        "principalIdDisplayName": "[variables('servicePrincipal').terraform.name]",
-                        "principalId": "[variables('servicePrincipal').terraform.objectId]",
+                        "principalIdDisplayName": "[variables('terraform').name]",
+                        "principalId": "[variables('terraform').objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').Contributor]"
                     }
                 ]
