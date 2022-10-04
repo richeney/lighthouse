@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "variables": {
-        "name": "Basic Support Service + Terraform deployment pipelines",
+        "name": "Basic Support Service + Terraform",
         "roleDefinitionId": {
             "Contributor": "b24988ac-6180-42a0-ab88-20f7382dd24c",
             "ManagedServicesRegistrationAssignmentDeleteRole": "91c1777a-f3dc-4fae-b103-61d183457e46",
@@ -29,7 +29,7 @@
             "name": "[guid(concat('Azure Citadel - ', variables('name')))]",
             "properties": {
                 "registrationDefinitionName": "[variables('name')]",
-                "description": "Azure support services for call logging and call management (L0/L1).",
+                "description": "Azure support services for call logging and call management (L0/L1). Terraform for CI/CD pipelines.",
                 "managedByTenantId": "655f0684-29ae-466e-8324-2ab22497254f",
                 "authorizations": [
                     {
