@@ -14,21 +14,21 @@
             "properties": {
                 "registrationDefinitionName": "Basic Support Service",
                 "description": "Azure support services for call logging and call management (L0/L1).",
-                "managedByTenantId": "655f0684-29ae-466e-8324-2ab22497254f",
+                "managedByTenantId": "3c584bbd-915f-4c70-9f2e-7217983f22f6",
                 "authorizations": [
                     {
-                        "principalIdDisplayName": "Azure Lighthouse Admins",
-                        "principalId": "b3333b16-f8de-4624-ad57-52b494d82fc4",
+                        "principalIdDisplayName": "Managed Service Management",
+                        "principalId": "9d2b2ec1-a465-431f-91d3-546f97b8fb26",
                         "roleDefinitionId": "[variables('ManagedServicesRegistrationAssignmentDeleteRole')]"
                     },
                     {
                         "principalIdDisplayName": "Managed Service Consultants",
-                        "principalId": "11a297dd-edbf-49b6-a935-968f147415e1",
+                        "principalId": "30f86a83-b2a9-477a-90d6-23e51042839a",
                         "roleDefinitionId": "[variables('Reader')]"
                     },
                     {
                         "principalIdDisplayName": "Managed Service Consultants",
-                        "principalId": "11a297dd-edbf-49b6-a935-968f147415e1",
+                        "principalId": "30f86a83-b2a9-477a-90d6-23e51042839a",
                         "roleDefinitionId": "[variables('SupportRequestContributor')]"
                     }
                 ]

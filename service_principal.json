@@ -9,16 +9,16 @@
             "Reader": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
             "SupportRequestContributor": "cfd33db0-3dd1-45e3-aa9d-cdbdf3b6f24e"
         },
-        "admins": {
-            "objectId": "b3333b16-f8de-4624-ad57-52b494d82fc4",
-            "name": "Azure Lighthouse Admins"
+        "management": {
+            "objectId": "9d2b2ec1-a465-431f-91d3-546f97b8fb26",
+            "name": "Managed Service Management"
         },
         "consultants": {
-            "objectId": "11a297dd-edbf-49b6-a935-968f147415e1",
+            "objectId": "30f86a83-b2a9-477a-90d6-23e51042839a",
             "name": "Managed Service Consultants"
         },
         "terraform": {
-            "objectId": "c824a33a-7b01-4571-a3c9-894d882fa2d6",
+            "objectId": "e11d5c66-9c16-488a-afce-fd4da574296d",
             "name": "Service principal - http://terraform"
         }
     },
@@ -30,11 +30,11 @@
             "properties": {
                 "registrationDefinitionName": "[variables('name')]",
                 "description": "Azure support services for call logging and call management (L0/L1). Terraform for CI/CD pipelines.",
-                "managedByTenantId": "655f0684-29ae-466e-8324-2ab22497254f",
+                "managedByTenantId": "3c584bbd-915f-4c70-9f2e-7217983f22f6",
                 "authorizations": [
                     {
-                        "principalIdDisplayName": "[variables('admins').name]",
-                        "principalId": "[variables('admins').objectId]",
+                        "principalIdDisplayName": "[variables('management').name]",
+                        "principalId": "[variables('management').objectId]",
                         "roleDefinitionId": "[variables('roleDefinitionId').ManagedServicesRegistrationAssignmentDeleteRole]"
                     },
                     {
